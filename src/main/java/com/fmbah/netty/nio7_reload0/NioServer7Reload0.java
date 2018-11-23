@@ -1,4 +1,4 @@
-package com.fmbah.netty.nio7;
+package com.fmbah.netty.nio7_reload0;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -6,26 +6,22 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
- * @ClassName NioServer7
+ * @ClassName NioServer7Reload0
  * @Description
- *
- * 实现服务器端接口到客户端请求后回复客户端一个请求
- *
  * @Author root
- * @Date 18-11-22 下午6:54
+ * @Date 18-11-23 上午10:01
  * @Version 1.0
  **/
-public class NioServer7 {
+public class NioServer7Reload0 {
 
-    public static void main (String args[]) throws Exception {
+    public static void main (String args[]) throws Exception{
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        ServerBootstrap serverBootstrap = new ServerBootstrap();
-
         try {
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new NioServerInitializer7());
+                    .childHandler(new NioServerInitializerReload0());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();

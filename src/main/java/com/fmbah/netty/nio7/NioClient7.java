@@ -9,6 +9,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 /**
  * @ClassName NioClient7
  * @Description
+ *
+ * 实现首次建立链接后,向服务器端发送请求；后续接收服务器端请求后,回复服务器一个请求
+ *
  * @Author root
  * @Date 18-11-22 下午7:08
  * @Version 1.0

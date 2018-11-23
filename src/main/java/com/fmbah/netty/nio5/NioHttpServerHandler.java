@@ -13,6 +13,17 @@ import java.net.URI;
 /**
  * @ClassName NioHttpServerHandler
  * @Description
+ *
+     * handler added
+     * channel registered
+     * channel active
+     * class io.netty.handler.codec.http.DefaultHttpRequest
+     * /0:0:0:0:0:0:0:1:34794
+     * 请求方法名: PUT
+     * channel inactive
+     * channel Unregistered
+     * channel handlerRemoved
+ *
  * @Author root
  * @Date 18-11-20 下午6:57
  * @Version 1.0
@@ -79,5 +90,11 @@ public class NioHttpServerHandler extends SimpleChannelInboundHandler<HttpObject
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel Unregistered");
         super.channelUnregistered(ctx);
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel handlerRemoved");
+        super.handlerRemoved(ctx);
     }
 }

@@ -28,6 +28,7 @@ public class NioClientHandler7 extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.writeAndFlush("from the server msg.....");
+        Thread.sleep(1000);
         super.channelActive(ctx);
     }
 }

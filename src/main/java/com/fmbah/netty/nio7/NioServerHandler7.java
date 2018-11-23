@@ -20,11 +20,13 @@ public class NioServerHandler7 extends SimpleChannelInboundHandler<String> {
 
         //向客户端写回数据
         ctx.writeAndFlush("server copy...." + UUID.randomUUID());
+        Thread.sleep(1000);
 
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+        ctx.close();
+        cause.printStackTrace();
     }
 }

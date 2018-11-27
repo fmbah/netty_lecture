@@ -1,4 +1,4 @@
-package com.fmbah.netty.nio5_reload0;
+package com.fmbah.netty.nio5.nio5_reload0;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

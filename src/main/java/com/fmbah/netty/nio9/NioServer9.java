@@ -1,27 +1,35 @@
-package com.fmbah.netty.nio8_9reload0;
+package com.fmbah.netty.nio9;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 /**
- * @ClassName NioChatServer8_9Reload0
+ * @ClassName NioServer9
  * @Description
+ *
+ * 监听服务端与客户端之间的连接...,超过一定时间后做出相应的动作
+ *
+ *
  * @Author root
- * @Date 18-11-23 下午2:02
+ * @Date 18-11-27 下午12:21
  * @Version 1.0
  **/
-public class NioChatServer8_9Reload0 {
-    public static void main (String args[]) throws Exception{
+public class NioServer9 {
+
+    public static void main (String args[]) throws Exception {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        try {
+        ServerBootstrap serverBootstrap = new ServerBootstrap();
 
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
+        try {
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new NioChatServer8_9InitializerReload0());
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new NioServerInitializer9());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();

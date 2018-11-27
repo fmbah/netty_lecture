@@ -1,4 +1,4 @@
-package com.fmbah.netty.nio7_reload0;
+package com.fmbah.netty.nio7.nio7_reload0;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

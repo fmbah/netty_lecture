@@ -7,8 +7,6 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @ClassName NioServer10_11Initializer
@@ -18,8 +16,6 @@ import org.slf4j.LoggerFactory;
  * @Version 1.0
  **/
 public class NioServer10_11Initializer extends ChannelInitializer<SocketChannel> {
-
-    private static final Logger logger = LoggerFactory.getLogger(NioServer10_11Initializer.class);
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -31,7 +27,7 @@ public class NioServer10_11Initializer extends ChannelInitializer<SocketChannel>
         //websocket.html?_ijt=v9nr426pp987pk5021heic2i0f:31 Uncaught DOMException: Failed to execute 'send' on 'WebSocket': Still in CONNECTING state.
         //    at send (http://localhost:63342/netty_lecture/netty_lecture_main/webapps/websocket.html?_ijt=v9nr426pp987pk5021heic2i0f:31:28)
         //    at HTMLInputElement.onclick (http://localhost:63342/netty_lecture/netty_lecture_main/webapps/websocket.html?_ijt=v9nr426pp987pk5021heic2i0f:41:74)
-        pipeline.addLast(new WebSocketServerProtocolHandler("ws", null, true));
+        pipeline.addLast(new WebSocketServerProtocolHandler("/ws", null, true));
 
         pipeline.addLast("NioServer10_11Handler", new NioServer10_11Handler());
     }

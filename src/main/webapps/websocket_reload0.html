@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket客户端</title>
+    <script>
+        var socket;
+        if (!window.WebSocket) {
+            alert('浏览器不支持websocket');
+        } else {
+            socket = new WebSocket("ws://localhost:8099/websocket")
+            socket.onopen = function (ev) {
+                document.getElementById("resMsg").value = 'websocket建立链接';
+            }
+            socket.onclose = function (ev) {
+                document.getElementById("resMsg").value += "\nwebsocket建立链接";
+            }
+            socket.onmessage = function (ev) {
+                document.getElementById("resMsg").value += "\n" + ev.data;
+            }
+            socket.onerror = function (ev) {
+                document.getElementById("resMsg").value += "\n" + ev.data;
+            }
+        }
+        function send() {
+            socket.send(document.getElementById('sendMsg').value)
+        }
+    </script>
+</head>
+<body>
+
+<input id="sendMsg"/>
+<input type="button" value="发送内容" onclick="javascript:send()">
+<textarea id="resMsg" style="width: 400px; height: 300px;"></textarea>
+<input type="button" value="清除内容" onclick="javascript:this.document.getElementById('resMsg').value='';"/>
+
+
+</body>
+</html>

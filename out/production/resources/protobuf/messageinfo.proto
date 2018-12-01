@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package messageinfopackage;
+
+option java_package = "com.fmbah.netty.nio12.nio12_reload0";
+option java_outer_classname = "MessageInfo";
+
+message AllMessage {
+    enum MessageType {
+        CAR = 1;
+        HOUSE = 2;
+    }
+
+    required MessageType messageType = 1;
+
+    oneof message_oneof {
+        CarType car_type = 2;
+        HouseType house_type = 3;
+    }
+}
+
+message CarType {
+    optional string brandName = 1;
+    optional int32 years = 2;
+    optional string location = 3;
+}
+
+message HouseType {
+    optional int32 price = 1;
+    optional int32 size = 2;
+    optional string village = 3;
+}

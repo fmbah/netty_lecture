@@ -1,45 +1,47 @@
+#! /usr/bin/env python
+# -*- coding;utf-8 -*-
+__author__ = '作者'
 
-class Car:
-    def __init__(self):
-        self.speed = 0
-        self.odometer = 0
-        self.time = 0
+import sys
+# 引入thrift插件
+sys.path.append('/usr/local/lib/python3.6/dist-packages/thrift-0.11.0-py3.6.egg')
+# 下面这句话解决了ModuleNotFoundError: No module named 'six' 错误
+sys.path.append('/usr/lib/python3/dist-packages')
 
-    def say_state(self):
-        print("I'm going {} kph!".format(self.speed))
+from com.fmbah.netty.nio18 import PersonService
+from com.fmbah.netty.nio18 import ttypes
 
-    def accelerate(self):
-        self.speed += 5
+from thrift import Thrift
+from thrift.transport import TSocket
+from thrift.transport import TTransport
+from thrift.protocol import TCompactProtocol
 
-    def brake(self):
-        self.speed -= 5
+try:
+    print('run....')
+    tSocket = TSocket.TSocket('127.0.0.1', 8899)
+    tSocket.setTimeout(600)
 
-    def step(self):
-        self.odometer += self.speed
-        self.time += 1
+    ttransport = TTransport.TFramedTransport(tSocket)
+    protocol = TCompactProtocol.TCompactProtocol(ttransport)
+    client = PersonService.Client(protocol)
 
-    def average_speed(self):
-        return self.odometer / self.time
+    ttransport.open()
+
+    person = client.getPersonByUsername("张三")
+    print(person.username)
+    print(person.age)
+    print(person.married)
+
+    print("--------------------------")
+    sPerson = ttypes.Person()
+    sPerson.age = 26
+    sPerson.married = False
+    sPerson.username = "Fmbah"
+    client.savePerson(sPerson)
+
+    ttransport.close()
+
+except Thrift.TException as tx:
+    print('$s' % tx.message)
 
 
-if __name__ == '__main__':
-    my_car = Car()
-    print("I'm a car!")
-    while True:
-        action = input("What should I do? [A]ccelerate, [B]rake, "
-                       "show [O]dometer, or show average [S]peed [E]exit?").upper()
-        if action not in "ABOSE" or len(action) != 1:
-            print("I don't know how to do that")
-            continue
-        if action == 'A':
-            my_car.accelerate()
-        elif action == 'B':
-            my_car.brake()
-        elif action == 'O':
-            print("The car has driven {} kilometers".format(my_car.odometer))
-        elif action == 'S':
-            print("The car's average speed was {} kph".format(my_car.average_speed()))
-        elif action == 'E':
-            break
-        my_car.step()
-        my_car.say_state()

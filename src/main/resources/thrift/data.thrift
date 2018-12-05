@@ -1,4 +1,5 @@
 namespace java com.fmbah.netty.nio18
+namespace py com.fmbah.netty.nio18
 
 typedef i16 short
 typedef i32 int

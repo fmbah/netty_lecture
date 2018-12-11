@@ -1,13 +1,21 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.5'
+    }
 }
 
+plugins {
+    id "com.google.protobuf" version "0.8.7"
+    id "java"
+}
 group 'com.fmbah'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
@@ -21,8 +29,28 @@ dependencies {
     compile 'com.google.protobuf:protobuf-java:3.6.1'
     compile 'com.google.protobuf:protobuf-java-util:3.6.1'
     compile 'org.apache.thrift:libthrift:0.11.0'
+    compile 'io.grpc:grpc-netty-shaded:1.16.1'
+    compile 'io.grpc:grpc-protobuf:1.16.1'
+    compile 'io.grpc:grpc-stub:1.16.1'
+
 
     compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
     compile group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
     compile group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.5.1-1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.16.1'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
 }

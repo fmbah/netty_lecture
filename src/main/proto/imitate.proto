@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package imitate;
+
+option java_multiple_files = true;
+option java_package = "com.fmbah.netty.nio25_28_imitate";
+option java_outer_classname = "Imitate";
+
+service ImitategRpc {
+    rpc p2p(Preq) returns (Pres) {}
+
+    rpc p2s(Preq) returns (stream Pres) {}
+
+    rpc s2p(stream Preq) returns (Pres) {}
+
+    rpc s2s(stream Preq) returns (stream Pres) {}
+}
+
+message Preq {
+    int32 req = 1;
+}
+
+message Pres {
+    int32 res = 1;
+}

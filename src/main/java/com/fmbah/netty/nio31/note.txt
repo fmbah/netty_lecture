@@ -1,0 +1,14 @@
+参照官方文档:
+https://github.com/grpc/grpc/tree/master/examples/node/static_codegen
+安装grpc-tools出错,一直无法继续；(可能和我本机环境变量有关,我使用的是机器自带的node安装)
+
+后续参照:https://blog.csdn.net/shidaping/article/details/53942476
+这个用npm直接安装 
+npm install grpc-tools --save-dev
+npm install google-protobuf --save
+npm install grpc --save
+在./node_modules/grpc-tools/bin下，你会找到 protoc.exe 和 grpc_node_plugin.exe两个文件。
+
+./node_modules/grpc-tools/bin/protoc --js_out=import_style=commonjs,binary:src/main/java/com/fmbah/netty/nio31/ --grpc_out=src/main/java/com/fmbah/netty/nio31/ --plugin=protoc-gen-grpc=./node_modules/grpc-tools/bin/grpc_node_plugin src/main/proto/Student.proto
+
+有个毛病 默认给我加上多余的目录,我明确指定了生成在哪个目录下后,又多加了src/main/proto这些目录

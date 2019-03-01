@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基于websocket聊天室</title>
+
+
+<script>
+    var socket;
+    if (!window.WebSocket) {
+        alert('浏览器不支持websocket,请使用\n Chrome\tSupported in version 4+\nFirefox\tSupported in version 4+\nInternet Explorer\tSupported in version 10+\nOpera\tSupported in version 10+\nSafari\tSupported in version 5+');
+    } else {
+        socket = new WebSocket("ws://127.0.0.1:8099/ws");
+        socket.onopen = function (ev) {
+            //链接成功
+        }
+        socket.onerror = function (ev) {
+            //异常
+        }
+        socket.onclose = function (ev) {
+            //关闭
+        }
+        socket.onmessage = function (ev) {
+            //传输中
+            ev.data
+        }
+    }
+    function send() {
+        if (!socket) {
+            alert('链接未建立');
+        } else if (socket.OPEN = WebSocket.OPEN) {
+            socket.send("123123123123");
+        }
+    }
+</script>
+</head>
+<body>
+<button value="send" onclick="send()"/>
+</body>
+</html>

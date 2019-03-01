@@ -18,5 +18,13 @@ public class TestProtobuf12 {
 
         AddressBookProtos.Person person = AddressBookProtos.Person.parseFrom(toBufferArray);
         System.out.println(person.getEmail() + "=" + person.getId() + "=" + person.getName());
+
+
+        AddressBookProtos.AddressBook build = AddressBookProtos.AddressBook.newBuilder().addPeople(fmbah).build();
+        byte[] bytes = build.toByteArray();
+        AddressBookProtos.AddressBook addressBook = AddressBookProtos.AddressBook.parseFrom(bytes);
+        addressBook.getPeopleList().forEach(per->{
+            System.out.println(per.getEmail());
+        });
     }
 }

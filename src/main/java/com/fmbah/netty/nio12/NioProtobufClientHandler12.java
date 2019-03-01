@@ -23,6 +23,7 @@ public class NioProtobufClientHandler12 extends SimpleChannelInboundHandler<Addr
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端激活了.....");
         AddressBookProtos.Person john =
                 AddressBookProtos.Person.newBuilder()
                         .setId(1234)

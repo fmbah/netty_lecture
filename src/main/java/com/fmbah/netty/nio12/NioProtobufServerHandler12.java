@@ -21,6 +21,9 @@ public class NioProtobufServerHandler12 extends SimpleChannelInboundHandler<Addr
 
         logger.info("ctx.channel: {},  msg.getPeopleCount(): {}", ctx.channel(), msg.getPeopleCount());
 
+
+        System.out.println("something ......" + msg.getPeopleList().size());
+
         for (AddressBookProtos.Person person : msg.getPeopleList()) {
             logger.info("id: {}, name: {}, email: {}, phone num: {}, phone type: {}",
                     person.getId(), person.getName(), person.getEmail(),

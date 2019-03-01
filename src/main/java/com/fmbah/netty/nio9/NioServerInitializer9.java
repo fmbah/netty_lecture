@@ -20,7 +20,7 @@ public class NioServerInitializer9 extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast(new IdleStateHandler(3,5, 2, TimeUnit.SECONDS));
+        pipeline.addLast(new IdleStateHandler(5,3, 10, TimeUnit.SECONDS));
         pipeline.addLast(new StringDecoder());
         pipeline.addLast(new StringEncoder());
 

@@ -17,11 +17,11 @@ public class Nio39Test0 {
         RandomAccessFile randomAccessFile = new RandomAccessFile("randomFile.txt", "rw");
         FileChannel randomAccessFileChannel = randomAccessFile.getChannel();
 
-        MappedByteBuffer map = randomAccessFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 5);//堆外内存,直接操作内存
+        // 堆外内存,直接操作内存
+        MappedByteBuffer map = randomAccessFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 3);
 
-        map.put(0, (byte)'a');
-        map.put(2, (byte)'b');
-
+        map.put(0, (byte)'z');
+        map.put(2, (byte)'z');
 
     }
 
